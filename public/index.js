@@ -1,23 +1,11 @@
-// Dummy data for now (you'll replace this with an API call)
-const posts = [
-    {
-        title: "First Blog Post",
-        content: "This is a short description of the first post.",
-    },
-    {
-        title: "Second Blog Post",
-        content: "Here is a preview of the second post.",
-    },
-    {
-        title: "Third Blog Post",
-        content: "Yet another exciting blog post!",
-    },
-];
+fetch("/app/blog/")
+    .then((res) => res.json())
+    .then((data) => test(data))
+    .catch((err) => console.log(err));
 
-// Function to display posts on the page
-const displayPosts = () => {
+const test = (data) => {
     const postList = document.getElementById("post-list");
-    posts.forEach((post) => {
+    data.blog.forEach((post) => {
         const postElement = document.createElement("div");
         postElement.classList.add("post");
         postElement.innerHTML = `
@@ -27,6 +15,3 @@ const displayPosts = () => {
         postList.appendChild(postElement);
     });
 };
-
-// Call the function to display posts
-displayPosts();

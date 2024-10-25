@@ -8,12 +8,7 @@ const {
 } = require("../controllers/blog.controller");
 const router = express.Router();
 
-router.route("/").get(getAllBlogs);
-router
-	.route("/:id")
-	.get(getSingleBlog)
-	.patch(updateBlog)
-	.post(createBlog)
-	.delete(deleteBlog);
+router.route("/").get(getAllBlogs).post(createBlog);
+router.route("/:id").get(getSingleBlog).patch(updateBlog).delete(deleteBlog);
 
 module.exports = router;
