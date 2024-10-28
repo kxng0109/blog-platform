@@ -16,10 +16,14 @@ const BlogSchema = new mongoose.Schema(
 			type: Date,
 			default: new Date().getTime(),
 		},
-		from: {
+		author: {
 			type: String,
-			default: this.email,
+			required: [true, "Author field cannot be empty"]
 		},
+		userID:{
+			type: String,
+			required: [true, ""]
+		}
 	},
 	{ timestamps: true },
 );

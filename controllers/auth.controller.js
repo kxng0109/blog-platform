@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const { StatusCodes } = require("http-status-codes");
+const axios = require("axios");
 
 const registerUserAuth = async (req, res) => {
 	try {
@@ -55,7 +56,15 @@ const loginUserAuth = async (req, res) => {
 			.status(StatusCodes.FORBIDDEN)
 			.json({ msg: "Invalid credentials" });
 	}
-	const token = user.generateToken();
+
+	const token = await user.generateToken();
+	await axios.get("http://localhost:3000/app/blog", {
+		headers: {
+			Authorization: "Bearer " + token, //the token is a variable which holds the token
+		},
+	});
+	// console.log(test);
+	// await user.verifyToken(token)
 	return res.status(200).json({ msg: `Welcome ${user.username}`, token });
 };
 

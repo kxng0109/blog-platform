@@ -32,7 +32,7 @@ UserSchema.methods.verify = function(password){
 }
 
 UserSchema.methods.generateToken = function(){
-	const token = jwt.sign({id: this._id, name: this.username}, process.env.JWT_SECRET, {
+	const token = jwt.sign({id: this._id, name: this.username, email: this.email}, process.env.JWT_SECRET, {
 		expiresIn: process.env.expiresIn
 	});
 	return token;

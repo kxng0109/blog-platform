@@ -32,10 +32,14 @@ const updateBlog = async (req, res) => {
 			.json({ msg: `Provide an id for the blog` });
 	}
 
-	const blog = await Blog.findByIdAndUpdate(blogId, {...req.body}, {
-		new: true,
-		runValidators: true
-	});
+	const blog = await Blog.findByIdAndUpdate(
+		blogId,
+		{ ...req.body },
+		{
+			new: true,
+			runValidators: true,
+		},
+	);
 
 	if (!blog) {
 		return res
@@ -46,10 +50,10 @@ const updateBlog = async (req, res) => {
 };
 
 const createBlog = async (req, res) => {
-	//I want to add a feature that the users id or user email is also part of the response to create the blog
+	const { name: author, userID } = req.user;
 	try {
-		const blog = await Blog.create({ ...req.body });
-		res.status(StatusCodes.CREATED).json({ blog});
+		const blog = await Blog.create({ ...req.body, userID, author });
+		res.status(StatusCodes.CREATED).json({ blog });
 	} catch (err) {
 		console.log(err);
 		if (err.name === "ValidationError") {
@@ -66,20 +70,7 @@ const createBlog = async (req, res) => {
 };
 
 const deleteBlog = async (req, res) => {
-	//Don't forget to do it such that people can't just randomly delete someone else's post just by using a random id that just happens to be the id of the blog
-	const { id: blogId } = req.params;
-	if (!blogId) {
-		return res
-			.status(StatusCodes.BAD_REQUEST)
-			.json({ msg: `Provide an id for the blog` });
-	}
-
-	const blog = await Blog.findByIdAndDelete(blogId);
-	if (!blog) {
-		return res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.json({ msg: `Could not find blog with id: ${blogId}` });
-	}
+	await Blog.findByIdAndDelete(req.user.blogId);
 	res.status(StatusCodes.OK).json({ msg: "Blog post has been deleted" });
 };
 
