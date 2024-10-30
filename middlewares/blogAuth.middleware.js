@@ -15,7 +15,7 @@ const blogAuthentication = async (req, res, next) => {
 	const blogPost = await Blog.findById(blogId).select("userID");
 	if (!blogPost) {
 		return res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.status(StatusCodes.NOT_FOUND)
 			.json({ msg: `Could not find blog with id: ${blogId}` });
 	}
 	if (blogPost.userID !== userID) {

@@ -12,10 +12,6 @@ const BlogSchema = new mongoose.Schema(
 			required: [true, "Content field can't be empty"],
 			minlength: 3,
 		},
-		time: {
-			type: Date,
-			default: new Date().getTime(),
-		},
 		author: {
 			type: String,
 			required: [true, "Author field cannot be empty"]

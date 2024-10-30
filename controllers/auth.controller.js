@@ -24,11 +24,9 @@ const registerUserAuth = async (req, res) => {
 			});
 		}
 
-		// let user = 'King'
 		const user = await User.create({ ...req.body });
-		// console.log(user._id);
 		return res.status(StatusCodes.CREATED).json({
-			msg: `Account created, welcome ${user.username}`,
+			msg: `Account created, welcome ${user.username}. You can log into the account.`,
 		});
 	} catch (error) {
 		console.log(error);
@@ -60,11 +58,9 @@ const loginUserAuth = async (req, res) => {
 	const token = await user.generateToken();
 	await axios.get("http://localhost:3000/app/blog", {
 		headers: {
-			Authorization: "Bearer " + token, //the token is a variable which holds the token
+			Authorization: "Bearer " + token,
 		},
 	});
-	// console.log(test);
-	// await user.verifyToken(token)
 	return res.status(200).json({ msg: `Welcome ${user.username}`, token });
 };
 

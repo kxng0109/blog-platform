@@ -7,7 +7,6 @@ const getAllBlogs = async (req, res) => {
 };
 
 const getSingleBlog = async (req, res) => {
-	//Note random people can get the blog id just by randomly generating an id that just happens to be the id of the post, fix it
 	const { id: blogId } = req.params;
 	if (!blogId) {
 		return res
@@ -18,10 +17,25 @@ const getSingleBlog = async (req, res) => {
 	const blog = await Blog.findById(blogId);
 	if (!blog) {
 		return res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.status(StatusCodes.NOT_FOUND)
 			.json({ msg: `Could not find blog with id: ${blogId}` });
 	}
 	res.status(StatusCodes.OK).json({ blog });
+};
+
+const getPersonalBlog = async (req, res) => {
+	try {
+		const { userID } = req.user;
+		if (!userID)
+			return (
+				res.status(StatusCodes.NOT_FOUND),
+				json({ msg: "User not found" })
+			);
+		const blog = await Blog.find({ userID });
+		res.status(StatusCodes.OK).json({ blog });
+	} catch (err) {
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: err });
+	}
 };
 
 const updateBlog = async (req, res) => {
@@ -43,7 +57,7 @@ const updateBlog = async (req, res) => {
 
 	if (!blog) {
 		return res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.status(StatusCodes.NOT_FOUND)
 			.json({ msg: `Could not find blog with id: ${blogId}` });
 	}
 	res.status(StatusCodes.OK).json({ blog });
@@ -77,6 +91,7 @@ const deleteBlog = async (req, res) => {
 module.exports = {
 	getAllBlogs,
 	getSingleBlog,
+	getPersonalBlog,
 	updateBlog,
 	createBlog,
 	deleteBlog,
