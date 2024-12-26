@@ -28,7 +28,7 @@ A Node.js application that allows users to create, edit, view, and delete their 
 
 - Node.js
 - Express.js
-- MongoDB
+- MongoDB (via mongoose)
 - JWT
 - bcrypt.js
 - axios
