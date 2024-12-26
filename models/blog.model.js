@@ -18,7 +18,7 @@ const BlogSchema = new mongoose.Schema(
 		},
 		userID:{
 			type: String,
-			required: [true, ""]
+			required: [true, "userID field can not be empty"]
 		}
 	},
 	{ timestamps: true },

@@ -5,12 +5,12 @@ A Node.js application that allows users to create, edit, view, and delete their 
 ## Table of Contents
 
 - <a href="#features">Features</a>
-- <a href="#technology-used">Technologies Used
-- <a href="#prerequisites">Prerequisites
-- <a href="#installation">Installation
-- <a href="#environment-variables">Environment Variables
-- <a href="#usage">Usage
-- <a href="#api-endpoints">API Endpoints
+- <a href="#technologies-used">Technologies Used</a>
+- <a href="#prerequisites">Prerequisites</a>
+- <a href="#installation">Installation</a>
+- <a href="#environment-variables">Environment Variables</a>
+- <a href="#usage">Usage</a>
+- <a href="#api-endpoints">API Endpoints</a>
 - <a href="#license">License</a>
 
 ## Features
@@ -47,29 +47,29 @@ Ensure you have the following installed:
 
 1. Clone the repository:
 	```bash
-		git clone https://github.com/yourusername/blog-app.git
-		cd blog-app
+	git clone https://github.com/yourusername/blog-app.git
+	cd blog-app
 	```
 
 2. Install dependencies:
 	```bash
-		npm install
+	npm install
 	```
 
 3. Set up environment variables (see <a href="#environment-variables">Environment Variables</a>).
 
 4. Start the server:
 	```bash
-		npm start
+	npm start
 	```
 
 ## Environment Variables
 
 Create a .env file in the root directory with the following variables:
 ```plaintext
-	PORT=3000
-	MONGO_URI=<link_to_mongodb_database>
-	JWT_SECRET=<your_jwt_secret>
+PORT=3000
+MONGO_URI=<link_to_mongodb_database>
+JWT_SECRET=<your_jwt_secret>
 ```
 Replace <link_to_mongodb_database> with the path to your mongoDB database
 Replace <your_jwt_secret> with a secure secret key for JWT.
@@ -78,12 +78,12 @@ Note: Never push your .env file to version control.
 ## Usage
 1. Start the server:
 ```bash
-	npm start
+npm start
 ```
 
 2. Access the application via:
 ```plaintext
-	http://localhost:PORT
+http://localhost:PORT
 ```
 Note: "PORT" is set to 3000 by default.
 

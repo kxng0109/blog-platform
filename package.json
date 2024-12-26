@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "dev": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css --watch"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "tailwindcss": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css --watch"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
+  "description": "A Node.js application that allows users to create, edit, view, and delete their blogs. The app ensures data security and user authentication using JWT. Admin-level permissions enable enhanced control over user-generated content.",
   "devDependencies": {
     "nodemon": "^3.1.7",
     "tailwindcss": "^3.4.14"
@@ -20,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-rate-limit": "^7.5.0",
     "helmet": "^8.0.0",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
